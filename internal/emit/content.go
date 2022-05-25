@@ -104,7 +104,7 @@ type PageTreeItemJSON struct {
 func NewPageTreeItemJSON(page *tree.Page) *PageTreeItemJSON {
 	json := &PageTreeItemJSON{
 		Title: page.Title,
-		URL:   page.ID,
+		URL:   fmt.Sprintf("%s.html", page.ID),
 	}
 
 	if len(page.Children) > 0 {
