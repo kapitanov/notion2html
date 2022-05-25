@@ -1,0 +1,11 @@
+<ul class="list-unstyled">
+    {{ range .Items }}
+    <li>
+        {{ if .Checked }}
+        <i class="bi bi-check-square"></i> {{ .Content | raw }}
+        {{ else }}
+        <i class="bi bi-square"></i> {{ .Content | raw }}
+        {{ end }}
+    </li>
+    {{ end }}
+</ul>

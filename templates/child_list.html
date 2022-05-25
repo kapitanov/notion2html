@@ -1,0 +1,16 @@
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">
+            Child pages
+        </h5>
+        <ul>
+            {{ range .Items }}
+            <li>
+                <a href="{{ .URL }}">
+                    {{ .Title }}
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+</div>

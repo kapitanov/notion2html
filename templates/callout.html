@@ -1,0 +1,8 @@
+<div class="alert alert-primary mb-2" role="alert">
+    {{ if .Title }}
+    <strong>
+        {{ .Title }}
+    </strong>
+    {{ end }}
+    {{ .Content | raw }}
+</div>

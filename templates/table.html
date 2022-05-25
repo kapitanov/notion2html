@@ -1,0 +1,29 @@
+<table class="table">
+    {{ if .HeaderRow }}
+    <thead>
+        <tr>
+            {{ range .HeaderRow.Cells }}
+            <th scope="col">
+                {{ .Content | raw }}
+            </th>
+            {{ end }}
+        </tr>
+    </thead>
+    {{ end }}
+    <tbody>
+        {{ range .BodyRows }}
+        <tr>
+            {{ if .HeaderCell }}
+            <th scope="row">
+                {{ .HeaderCell.Content | raw }}
+            </th>
+            {{ end }}
+            {{ range .BodyCells }}
+            <td>
+                {{ .Content | raw }}
+            </td>
+            {{ end }}
+        </tr>
+        {{ end }}
+    </tbody>
+</table>

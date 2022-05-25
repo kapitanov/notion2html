@@ -1,0 +1,7 @@
+<ul>
+    {{ range .Items }}
+    <li>
+        {{ .Content | raw }}
+    </li>
+    {{ end }}
+</ul>

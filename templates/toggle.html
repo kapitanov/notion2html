@@ -1,0 +1,13 @@
+<div class="card mb-2">
+    <div class="card-header">
+        <a class="btn btn-link d-block text-start" href="#toggle-{{ .ID }}" data-bs-toggle="collapse" role="button"
+            aria-expanded="false" aria-controls="toggle-{{ .ID }}">
+            {{ .Header | raw }}
+        </a>
+    </div>
+    <div class="collapse" id="toggle-{{ .ID }}">
+        <div class="card-body">
+            {{ .Content | raw }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<table class="table">
+    <thead>
+        <tr>
+            {{ range .PropertyNames }}
+            <th scope="col">
+                {{ .}}
+            </th>
+            {{ end }}
+        </tr>
+    </thead>
+    <tbody>
+        {{ range .Entries }}
+        <tr>
+            {{ if .Content }}
+            {{ $ID := .ID }}
+            {{ range .Properties }}
+            <td>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#view-{{ $ID }}">
+                    {{ .Content | raw }}
+                </a>
+            </td>
+            {{ end }}
+            {{ else }}
+            {{ range .Properties }}
+            <td>
+                {{ .Content | raw }}
+            </td>
+            {{ end }}
+            {{ end }}
+        </tr>
+        {{ end }}
+    </tbody>
+</table>
+
+
+{{ range .Entries }}
+{{ if .Content }}
+<div id="view-{{ .ID }}" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    {{ .Title }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ .Content.HTML | raw }}
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
+{{ end }}

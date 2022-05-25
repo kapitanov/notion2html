@@ -1,0 +1,10 @@
+version: '2.4'
+services:
+    notion2html:
+        build: .
+        image: notion2html:latest
+        container_name: notion2html
+        restart: always
+        env_file: .env
+        volumes:
+            - ./out:/out

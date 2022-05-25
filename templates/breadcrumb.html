@@ -1,0 +1,22 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/">
+                <i class="bi bi-house-fill"></i>
+            </a>
+        </li>
+        {{ range .Items }}
+        {{ if .URL }}
+        <li class="breadcrumb-item">
+            <a href="{{ .URL }}">
+                {{ .Title }}
+            </a>
+        </li>
+        {{ else }}
+        <li class="breadcrumb-item active" aria-current="page">
+            {{ .Title }}
+        </li>
+        {{ end }}
+        {{ end }}
+    </ol>
+</nav>
