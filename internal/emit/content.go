@@ -36,6 +36,11 @@ func (e *Emitter) Generate(ctx context.Context, pageSet *tree.PageSet) (int, err
 		return 0, err
 	}
 
+	err = e.metadata.Save()
+	if err != nil {
+		return 0, err
+	}
+
 	return 0, nil
 }
 
@@ -70,10 +75,7 @@ func (e *Emitter) contentPage(ctx context.Context, page *tree.Page) error {
 		return err
 	}
 
-	err = e.metadata.UpdateLastEdited(page.ID, page.LastEdited)
-	if err != nil {
-		return err
-	}
+	e.metadata.UpdateLastEdited(page.ID, page.LastEdited)
 
 	e.pageCount++
 	return nil

@@ -1,9 +1,41 @@
+{{ $Root := . }}
 <div class="card mb-4">
-    <div class="card-body">
-        <h5 class="card-title">
-            <a href="{{ .URL }}">
-                {{ .Title }}
-            </a>
-        </h5>
-    </div>
+	{{ if (gt (len .Images) 0) }}
+	<div class="row g-0">
+		<div class="col-4">
+			{{ range (slice .Images 0 1) }}
+			<a href="{{ $Root.URL }}" class="text-decoration-none">
+				<img class="img-fluid rounded-start" src="{{ . }}" alt="{{ $Root.Name }}" />
+			</a>
+			{{ end }}
+		</div>
+		<div class="col-8">
+			<div class="card-body">
+				<h5 class="card-title">
+					<a href="{{ .URL }}" class="text-decoration-none">
+						{{ .Title }}
+					</a>
+				</h5>
+				<p class="card-text">
+					<a href="{{ .URL }}" class="text-decoration-none text-reset">
+						{{ .Description }}
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	{{ else }}
+	<div class="card-body">
+		<h5 class="card-title">
+			<a href="{{ .URL }}" class="text-decoration-none">
+				{{ .Title }}
+			</a>
+		</h5>
+		<p class="card-text">
+			<a href="{{ .URL }}" class="text-decoration-none text-reset">
+				{{ .Description }}
+			</a>
+		</p>
+	</div>
+	{{ end }}
 </div>

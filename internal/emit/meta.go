@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
 	"time"
@@ -15,8 +16,11 @@ type metadata struct {
 	force    bool
 }
 
+const currentMetadataVersion = 1
+
 type metadataJSON struct {
-	Pages map[string]*metadataJSONItem `json:"pages"`
+	Version int                          `json:"version"`
+	Pages   map[string]*metadataJSONItem `json:"pages"`
 }
 
 type metadataJSONItem struct {
@@ -25,6 +29,10 @@ type metadataJSONItem struct {
 
 func (m *metadata) IsUpToDate(pageID string, lastEdited time.Time) bool {
 	if m.force {
+		return false
+	}
+
+	if m.json.Version != currentMetadataVersion {
 		return false
 	}
 
@@ -46,7 +54,7 @@ func (m *metadata) IsUpToDate(pageID string, lastEdited time.Time) bool {
 	return false
 }
 
-func (m *metadata) UpdateLastEdited(pageID string, lastEdited time.Time) error {
+func (m *metadata) UpdateLastEdited(pageID string, lastEdited time.Time) {
 	item, ok := m.json.Pages[pageID]
 	if !ok {
 		item = &metadataJSONItem{}
@@ -54,11 +62,11 @@ func (m *metadata) UpdateLastEdited(pageID string, lastEdited time.Time) error {
 
 	item.LastEdited = &lastEdited
 	m.json.Pages[pageID] = item
-
-	return m.Save()
 }
 
 func (m *metadata) Save() error {
+	m.json.Version = currentMetadataVersion
+
 	bs, err := json.MarshalIndent(m.json, "", "    ")
 	if err != nil {
 		return err
@@ -102,6 +110,10 @@ func (e *Emitter) loadMetadata(force bool) (*metadata, error) {
 		filename: filename,
 		json:     val,
 		force:    force,
+	}
+
+	if m.json.Version != currentMetadataVersion {
+		log.Printf("metadata format is out of date (%v vs %v)", m.json.Version, currentMetadataVersion)
 	}
 
 	return m, nil
