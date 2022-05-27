@@ -8,6 +8,7 @@ import (
 
 type PageSet struct {
 	Roots       Pages
+	ByID        map[string]*Page
 	LastUpdated time.Time
 }
 

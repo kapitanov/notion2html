@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
+	"path/filepath"
 
 	"github.com/kapitanov/notion2html/internal/ast"
 	"github.com/kapitanov/notion2html/internal/html"
@@ -25,6 +27,11 @@ func (e *Emitter) Generate(ctx context.Context, pageSet *tree.PageSet) (int, err
 	}
 
 	err = e.indexPage(pageSet)
+	if err != nil {
+		return 0, err
+	}
+
+	err = e.dropRemovedPages(pageSet)
 	if err != nil {
 		return 0, err
 	}
@@ -78,6 +85,42 @@ func (e *Emitter) treeJSON(pageSet *tree.PageSet) error {
 	err := e.emitJSON("index.json", json)
 	if err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (e *Emitter) dropRemovedPages(pageSet *tree.PageSet) error {
+	entries, err := os.ReadDir(e.outputDirectory)
+	if err != nil {
+		return err
+	}
+
+	for _, entry := range entries {
+		if entry.IsDir() {
+			continue
+		}
+
+		id := filepath.Base(entry.Name())
+		ext := filepath.Ext(id)
+		if ext != ".html" {
+			continue
+		}
+
+		id = id[0 : len(id)-len(ext)]
+		if id == "index" {
+			continue
+		}
+
+		if _, exists := pageSet.ByID[id]; exists {
+			continue
+		}
+
+		log.Printf("page %s doesn't exists anymore", id)
+		err = os.Remove(filepath.Join(e.outputDirectory, entry.Name()))
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil

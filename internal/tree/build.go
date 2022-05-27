@@ -17,6 +17,7 @@ func Load(ctx context.Context, notion *notionapi.Client) (*PageSet, error) {
 
 	set := &PageSet{
 		Roots:       rootPages,
+		ByID:        make(map[string]*Page),
 		LastUpdated: rawPages[0].LastEditedTime,
 	}
 
@@ -24,6 +25,14 @@ func Load(ctx context.Context, notion *notionapi.Client) (*PageSet, error) {
 		if set.LastUpdated.Before(page.LastEditedTime) {
 			set.LastUpdated = page.LastEditedTime
 		}
+	}
+
+	err = set.Roots.Traverse(func(page *Page) error {
+		set.ByID[page.ID] = page
+		return nil
+	})
+	if err != nil {
+		return nil, err
 	}
 
 	return set, nil
