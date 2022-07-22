@@ -16,7 +16,7 @@ type metadata struct {
 	force    bool
 }
 
-const currentMetadataVersion = 1
+const currentMetadataVersion = 2
 
 type metadataJSON struct {
 	Version int                          `json:"version"`

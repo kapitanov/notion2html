@@ -74,12 +74,13 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top navbar-dark bg-dark">
-        <div class="container-fluid">
+    <nav class="navbar fixed-top navbar-light bg-transparent border-bottom"
+         style="backdrop-filter: blur(4px); background-color: rgba(255, 255, 255, .5) !important;">
+        <div class="container">
             <a class="navbar-brand" href="#" data-bs-toggle="modal" data-bs-target="#contentsModal">
                 <i class="bi bi-list"></i>
             </a>
-            <span class="navbar-text overflow-hidden me-auto d-none d-md-inline">
+            <span class="navbar-text overflow-hidden me-auto d-inline" style="max-width: calc(100vw - 60px);">
                 {{ .Title | html }}
             </span>
         </div>
@@ -107,10 +108,20 @@
         </div>
     </div>
     <main class="container">
-        <h1 class="mb-4">
-            {{ .Title | html }}
-        </h1>
-        {{ .Content | raw }}
+        <div class="pt-4">
+            {{ .Breadcrumb | raw }}
+        </div>
+        <article>
+            <h1 class="mb-2">
+                {{ .Title | html }}
+            </h1>
+            <div class="mb-4 text-muted">
+                {{ formatTime .Page.LastEdited "2 Jan 2006 15:04:05" }}
+            </div>
+            <div>
+                {{ .Content | raw }}
+            </div>
+        </article>
     </main>
 </body>
 
