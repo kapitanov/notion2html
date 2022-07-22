@@ -1,6 +1,7 @@
 package processors
 
 import (
+	"log"
 	"net/url"
 
 	"github.com/badoux/goscraper"
@@ -26,15 +27,15 @@ func (_ bookmarkProcessor) Process(container ast.Container, provider Provider, r
 
 	document, err := goscraper.Scrape(linkPreview.URL, 5)
 	if err != nil {
-		return nil, err
+		log.Printf("unable to scrape %s: %v", linkPreview.URL, err)
+	} else {
+		linkPreview.Icon = document.Preview.Icon
+		linkPreview.Name = document.Preview.Name
+		linkPreview.Title = document.Preview.Title
+		linkPreview.Description = document.Preview.Description
+		linkPreview.Images = document.Preview.Images
+		linkPreview.Link = document.Preview.Link
 	}
-
-	linkPreview.Icon = document.Preview.Icon
-	linkPreview.Name = document.Preview.Name
-	linkPreview.Title = document.Preview.Title
-	linkPreview.Description = document.Preview.Description
-	linkPreview.Images = document.Preview.Images
-	linkPreview.Link = document.Preview.Link
 
 	container.AppendNode(linkPreview)
 	return linkPreview, nil
