@@ -2,6 +2,7 @@ package processors
 
 import (
 	"github.com/jomei/notionapi"
+
 	"github.com/kapitanov/notion2html/internal/ast"
 )
 
@@ -40,6 +41,8 @@ var blockProcessors = map[notionapi.BlockType]Processor{
 	notionapi.BlockTypeToggle:           toggleProcessor{},
 	notionapi.BlockTypeToDo:             listProcessor{},
 	notionapi.BlockTypeLinkPreview:      linkPreviewProcessor{},
+	notionapi.BlockTypeVideo:            videoProcessor{},
+	notionapi.BlockTypeBookmark:         bookmarkProcessor{},
 }
 
 func init() {

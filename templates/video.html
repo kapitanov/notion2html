@@ -1,0 +1,13 @@
+<div class="card">
+    {{ if .Youtube }}
+    <iframe class="card-img-top" width="560" height="315" src="{{ .Youtube.URL }}" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    {{ else }}
+    <iframe class="card-img-top" width="560" height="315" src="{{ .URL }}" frameborder="0" allowfullscreen></iframe>
+    {{ end }}
+    <div class="card-body">
+        <p>
+            {{ .CaptionHTML | raw }}
+        </p>
+        <a href="{{ .URL }}" class="btn btn-primary">Source URL</a>
+    </div>
+</div>

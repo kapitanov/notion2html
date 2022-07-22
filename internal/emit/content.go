@@ -41,7 +41,7 @@ func (e *Emitter) Generate(ctx context.Context, pageSet *tree.PageSet) (int, err
 		return 0, err
 	}
 
-	return 0, nil
+	return e.pageCount, nil
 }
 
 func (e *Emitter) indexPage(pageSet *tree.PageSet) error {
