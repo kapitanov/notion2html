@@ -2,6 +2,7 @@ package tree
 
 import (
 	"context"
+	"errors"
 
 	"github.com/jomei/notionapi"
 )
@@ -14,6 +15,9 @@ func Load(ctx context.Context, notion *notionapi.Client) (*PageSet, error) {
 
 	rootPages, _ := buildTree(rawPages)
 	setPagesDepth(rootPages, 0)
+	if len(rootPages) == 0 {
+		return nil, errors.New("no pages detected (check your access token)")
+	}
 
 	set := &PageSet{
 		Roots:       rootPages,
