@@ -25,7 +25,7 @@ func init() {
 	flagOutputDirectory := flags.StringP("output", "o", "", "path to output directory")
 	flagAccessToken := flags.StringP("token", "t", "", "access token for Notion")
 	flagForce := flags.BoolP("force", "f", false, "rebuild all pages")
-	flagPeriod := flags.DurationP("period", "p", 10*time.Minute, "refresh timer period")
+	flagPeriod := flags.DurationP("period", "p", 1*time.Hour, "refresh timer period")
 
 	command.RunE = func(cmd *cobra.Command, args []string) error {
 		outputDirectory := *flagOutputDirectory
