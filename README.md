@@ -1,5 +1,18 @@
 # notion2html
 
+---
+
+* [Command line arguments](#command-line-arguments)
+  * [Generate once](#generate-once)
+  * [Watch for changes](#watch-for-changes)
+* [Run in Docker](#run-in-docker)
+* [Example - generate a static website from Notion](#example---generate-a-static-website-from-notion)
+* [Example - serve a website from a Notion space (with HTTPS!)](#example---serve-a-website-from-a-notion-space-with-https)
+* [How to get an access token](#how-to-get-an-access-token)
+* [License](#license)
+
+---
+
 Generates a static website from [Notion](https://www.notion.so/) and watches for changes.
 
 ## Command line arguments
