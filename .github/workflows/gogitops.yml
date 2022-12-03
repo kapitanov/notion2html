@@ -1,5 +1,8 @@
-name: Pull Request Action
+name: GoGitOps
 on:
+  push:
+    branches:
+      - "master"
   pull_request:
     branches:
       - "master"
