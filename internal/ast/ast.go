@@ -17,4 +17,3 @@ type ContainerEx interface {
 	Container
 	ShouldProcessChildren() bool
 }
-

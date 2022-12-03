@@ -14,7 +14,7 @@ type Emitter struct {
 	outputDirectory string
 	builder         *convert.ASTBuilder
 	metadata        *metadata
-	pageCount int
+	pageCount       int
 }
 
 func NewEmitter(outputDirectory string, builder *convert.ASTBuilder, force bool) (*Emitter, error) {

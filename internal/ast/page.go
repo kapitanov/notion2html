@@ -6,11 +6,11 @@ import (
 )
 
 type Page struct {
-	Page    *tree.Page
-	Title   string
-	Content string
+	Page       *tree.Page
+	Title      string
+	Content    string
 	Breadcrumb string
-	Nodes   []Node
+	Nodes      []Node
 }
 
 func (ast *Page) ToHTML(w *html.Writer) {

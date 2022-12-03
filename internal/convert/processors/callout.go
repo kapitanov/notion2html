@@ -13,8 +13,8 @@ func (_ calloutProcessor) Process(container ast.Container, provider Provider, ra
 		Text: buildText(block.Callout.RichText),
 	}
 
-	if  block.Callout.Icon != nil {
-		if block.Callout.Icon.Emoji != nil  {
+	if block.Callout.Icon != nil {
+		if block.Callout.Icon.Emoji != nil {
 			callout.Title = string(*block.Callout.Icon.Emoji)
 		}
 	}

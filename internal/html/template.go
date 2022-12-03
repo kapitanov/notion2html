@@ -54,6 +54,6 @@ var templateFunctions = template.FuncMap{
 		return t.Format(format)
 	},
 	"mul": func(x, y int) int {
-		return x*y
+		return x * y
 	},
 }

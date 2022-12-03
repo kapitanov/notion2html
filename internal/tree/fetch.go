@@ -26,7 +26,7 @@ func fetchPages(ctx context.Context, notion *notionapi.Client) ([]*notionapi.Pag
 			page, ok := result.(*notionapi.Page)
 			if ok {
 				//if page.Parent.Type == "page_id" || page.Parent.Type == "workspace" {
-					pages = append(pages, page)
+				pages = append(pages, page)
 				//}
 			}
 		}

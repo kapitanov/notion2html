@@ -5,7 +5,7 @@ import (
 	"github.com/kapitanov/notion2html/internal/ast"
 )
 
-type headingProcessor struct {}
+type headingProcessor struct{}
 
 func (_ headingProcessor) Process(container ast.Container, provider Provider, rawBlock notionapi.Block) (ast.Node, error) {
 	var level int
